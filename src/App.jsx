@@ -140,9 +140,9 @@ export default function App() {
 
                 try {
                     const query = `
-                     [out:json][timeout:10];
-                     node["amenity"="toilets"](around:100000,${latitude},${longitude});
-                     out body;
+                        [out:json][timeout:10];
+                        node["amenity"="toilets"](around:100000,${latitude},${longitude});
+                        out body;
                     `;
 
                     const res = await fetch("https://overpass-api.de/api/interpreter", {
@@ -150,7 +150,6 @@ export default function App() {
                         body: query,
                     });
                     const data = await res.json();
-                    console.log(data);
 
                     const sorted = data.elements
                         .filter((t) => t.lat && t.lon)
@@ -260,14 +259,13 @@ export default function App() {
       `}</style>
 
             <div
-                className="min-h-screen bg-grid flex flex-col items-center"
+                className="min-h-screen bg-grid flex flex-col items-center w-full"
                 style={{
                     background: "radial-gradient(ellipse at 50% 0%, #0f1f3d 0%, #060c1a 70%)",
                     fontFamily: "'DM Sans', sans-serif",
                     color: "white",
                 }}
             >
-                {/* Header */}
                 <div className="w-full max-w-md px-5 pt-10 pb-4">
                     <p
                         className="text-center uppercase tracking-widest text-xs mb-1"
@@ -289,16 +287,13 @@ export default function App() {
                     </h1>
                 </div>
 
-                {/* Main content area */}
-                <div className="w-full max-w-md px-5 flex-1 flex flex-col items-center">
+                <div className="w-full px-5 flex-1 flex flex-col items-center">
 
-                    {/* IDLE */}
                     {phase === "idle" && (
                         <div className="flex flex-col items-center justify-center gap-8 flex-1 w-full">
                             <div className="relative flex items-center justify-center" style={{ width: 240, height: 240 }}>
                                 <div className="ring" style={{ width: 220, height: 220, animationDelay: "0s", pointerEvents: "none" }} />
                                 <div className="ring" style={{ width: 200, height: 200, animationDelay: "0.5s", pointerEvents: "none" }} />
-
                                 <button
                                     onClick={handlePanic}
                                     className={`panic-btn relative z-10 rounded-full flex flex-col items-center justify-center select-none ${pulse ? "panic-pulse" : ""}`}
@@ -310,7 +305,7 @@ export default function App() {
                                         border: "3px solid rgba(255,100,100,0.4)",
                                     }}
                                 >
-                                    <span style={{ fontSize: 52, lineHeight: 1 }}>🚨</span>
+                                    <span style={{ fontSize: 52, lineHeight: 1, color: "white", fontWeight: "black" }}>!</span>
                                     <span
                                         className="mt-2 text-white font-black tracking-widest"
                                         style={{ fontFamily: "'Bebas Neue', cursive", fontSize: "1.6rem", letterSpacing: "0.12em" }}
@@ -325,14 +320,12 @@ export default function App() {
                                     </span>
                                 </button>
                             </div>
-
                             <p className="text-center text-sm" style={{ color: "rgba(255,255,255,0.35)", fontFamily: "'DM Mono', monospace" }}>
                                 Uses your location to find the<br />5 closest public toilets
                             </p>
                         </div>
                     )}
 
-                    {/* LOCATING */}
                     {phase === "locating" && (
                         <div className="flex flex-col items-center gap-6 mt-16" style={{ animation: "fadeSlideUp 0.4s ease-out" }}>
                             <div className="locating-spin" />
@@ -345,7 +338,6 @@ export default function App() {
                         </div>
                     )}
 
-                    {/* ERROR */}
                     {phase === "error" && (
                         <div className="flex flex-col items-center justify-center gap-6 flex-1 w-full" style={{ animation: "fadeSlideUp 0.4s ease-out" }}>
                             <div
@@ -376,7 +368,6 @@ export default function App() {
                         </div>
                     )}
 
-                    {/* FOUND */}
                     {phase === "found" && (
                         <div className="w-full mt-4" style={{ animation: "fadeSlideUp 0.4s ease-out" }}>
                             {coords && (
@@ -389,7 +380,7 @@ export default function App() {
                                         fontFamily: "'DM Mono', monospace",
                                     }}
                                 >
-                                    <span>📍 {coords.lat.toFixed(5)}, {coords.lng.toFixed(5)}</span>
+                                    <span>LOC: {coords.lat.toFixed(5)}, {coords.lng.toFixed(5)}</span>
                                     <span style={{ color: "rgba(255,255,255,0.3)" }}>YOUR LOCATION</span>
                                 </div>
                             )}
@@ -432,8 +423,6 @@ export default function App() {
                     )}
                 </div>
 
-                {/* Footer */}
-                {/* Footer */}
                 <div className="py-6 text-center px-5 max-w-md mx-auto">
                     <p
                         className="text-xs mb-2"
@@ -449,4 +438,7 @@ export default function App() {
                         Your location is not stored, tracked, or shared with us.
                     </p>
                 </div>
-                ```
+            </div>
+        </>
+    );
+}
