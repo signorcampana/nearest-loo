@@ -433,13 +433,20 @@ export default function App() {
                 </div>
 
                 {/* Footer */}
-                <p
-                    className="py-4 text-center text-xs"
-                    style={{ color: "rgba(255,255,255,0.15)", fontFamily: "'DM Mono', monospace" }}
-                >
-                    POWERED BY GREAT BRITISH PUBLIC TOILET MAP
-                </p>
-            </div>
-        </>
-    );
-}
+                {/* Footer */}
+                <div className="py-6 text-center px-5 max-w-md mx-auto">
+                    <p
+                        className="text-xs mb-2"
+                        style={{ color: "rgba(255,255,255,0.15)", fontFamily: "'DM Mono', monospace" }}
+                    >
+                        POWERED BY OPENSTREETMAP
+                    </p>
+                    <p
+                        className="text-xs"
+                        style={{ color: "rgba(255,255,255,0.25)", fontFamily: "'DM Mono', monospace", lineHeight: "1.6" }}
+                    >
+                        This app uses your location to find nearby public toilets.
+                        Your location is not stored, tracked, or shared with us.
+                    </p>
+                </div>
+                ```
